@@ -73,6 +73,10 @@ function App() {
     setMonths(dates);
   };
 
+  useEffect(() => {
+    document.title = t("title");
+  }, [locale]);
+
   useEffect(calculateValues, [salary, numberOfMonths]);
 
   return (
