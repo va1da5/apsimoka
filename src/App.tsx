@@ -133,7 +133,7 @@ function App() {
             </div>
           </div>
 
-          <div className="mt-10 flex flex-wrap gap-7 p-4">
+          <div className="mt-10 flex flex-wrap justify-center gap-7 p-4">
             {months &&
               months.map((date, index) => (
                 <div
