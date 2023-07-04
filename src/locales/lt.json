@@ -6,8 +6,10 @@
         "description": "Teisingai pasirinkus kurį mėnesį imti atostogas, galima gauti papildomą pinigų sumą prie savo atlyginimo. Atostoginiai už dieną paskaičiuojami pagal <1>paskutinių triejų mėnesių vidutinį užmokestį</1>.",
         "salaryLabel": "Bazinė alga (prieš mokesčius)",
         "monthsLabel": "Rodomų mėnesių skaičius",
-        "average": "Vidutinis užmokestis per diena yra <strong>{{average}}€</strong> per pasirinktus mėnesius",
-        "workDays": "{{days}} darbo dienų/os",
-        "pay": "{{pay}}€/diena"
+        "workDays": "Darbo dienų per mėnesi",
+        "perDay": "€/diena",
+        "holidayPay": "Atostogų diena",
+        "workPay": "Darbo diena",
+        "payPercentageDifference": "% lyginant su darbo diena"
     }
 }

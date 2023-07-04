@@ -6,8 +6,10 @@
         "description": "By choosing the right month to take a vacation, it is possible to receive an additional amount of money added to your salary. The vacation pay per day is calculated based on the average salary of the last three months, according to <1>Lithuanian Labour Law</1>.",
         "salaryLabel": "Base salary (Gross)",
         "monthsLabel": "Number of upcoming months",
-        "average": "Average pay is <strong>{{average}}€/day</strong> over listed months",
-        "workDays": "{{days}} work days",
-        "pay": "{{pay}}€/day"
+        "workDays": "Works days per month",
+        "perDay": "€/day",
+        "holidayPay": "Holiday pay per day",
+        "workPay": "Work pay per day",
+        "payPercentageDifference": "% compared to the work day"
     }
 }

@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
 import { Calendar } from "@/components/ui/calendar";
-import { ArrowBigDown, ArrowBigUp } from "lucide-react";
+import { ArrowBigDown, ArrowBigUp, Info } from "lucide-react";
 import { bankHolidays } from "./values";
 import SalaryInput from "./components/salaryInput";
 import MonthsInput from "./components/monthsInput";
 import LanguageSelect from "./components/languageSelect";
 import { lt, uk } from "date-fns/locale";
 import { Trans, useTranslation } from "react-i18next";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "./components/ui/hover-card";
 
 const bankHolidaysISOString = bankHolidays.map((date) => date.toISOString());
 
@@ -33,7 +38,7 @@ function countWorkingDays(date: Date): number {
   return count;
 }
 
-const calcPayPerDay = (baseSalary: number, date: Date): number => {
+const calcPayHolidayPerDay = (baseSalary: number, date: Date): number => {
   const workingDays = [...Array(3).keys()]
     .map((_, index) => {
       const newDate = new Date(date);
@@ -46,6 +51,17 @@ const calcPayPerDay = (baseSalary: number, date: Date): number => {
   return (baseSalary * 3) / workingDays;
 };
 
+const calcWorkPayPerDay = (baseSalary: number, date: Date): number => {
+  const workingDays = countWorkingDays(date);
+  return baseSalary / workingDays;
+};
+
+const calcPercentage = (holidayPay: number, workday: number): string => {
+  const value = (100 * holidayPay) / workday - 100;
+  if (value > 0) return "+" + value.toFixed(2);
+  return value.toFixed(2);
+};
+
 function App() {
   const now = new Date();
   const { t, i18n } = useTranslation();
@@ -53,10 +69,8 @@ function App() {
   const [numberOfMonths, setNumberOfMonth] = useState<number>(12);
   const [months, setMonths] = useState<Date[]>([]);
   const [salary, setSalary] = useState<number | undefined>(1000);
-  const [payPerDayAverage, setPayPerDayAverage] = useState<number | undefined>(
-    0
-  );
-  const [payPerDay, setPayPerDay] = useState<number[] | []>([]);
+  const [holidayPayPerDay, setHolidayPayPerDay] = useState<number[] | []>([]);
+  const [workPayPerDay, setWorkPayPerDay] = useState<number[] | []>([]);
 
   const calculateValues = () => {
     const dates = [...Array(numberOfMonths).keys()].map((_, index): Date => {
@@ -65,11 +79,14 @@ function App() {
       return date;
     });
 
-    const pays = dates.map((date) => calcPayPerDay(Number(salary), date));
+    setHolidayPayPerDay(
+      dates.map((date) => calcPayHolidayPerDay(Number(salary), date))
+    );
 
-    const payAverage = pays.reduce((out, pay) => out + pay, 0) / pays.length;
-    setPayPerDay(pays);
-    setPayPerDayAverage(payAverage);
+    setWorkPayPerDay(
+      dates.map((date) => calcWorkPayPerDay(Number(salary), date))
+    );
+
     setMonths(dates);
   };
 
@@ -126,11 +143,6 @@ function App() {
               <SalaryInput value={salary as number} onChange={setSalary} />
               <MonthsInput value={numberOfMonths} onChange={setNumberOfMonth} />
             </div>
-            <div className="max-w-[300px]">
-              <Trans i18nKey="average" average={payPerDayAverage?.toFixed(2)}>
-                {{ average: payPerDayAverage?.toFixed(2) }}€/day
-              </Trans>
-            </div>
           </div>
 
           <div className="mt-10 flex flex-wrap justify-center gap-7 p-4">
@@ -157,23 +169,69 @@ function App() {
                   }
 
                   <div className="flex justify-between p-2">
-                    <div className="flex">
-                      {payPerDayAverage &&
-                      payPerDay[index] > payPerDayAverage ? (
-                        <ArrowBigUp className="inline text-green-500" />
-                      ) : (
-                        <ArrowBigDown className="inline text-red-500" />
-                      )}{" "}
-                      <span className="text-lg">
-                        <Trans i18nKey="pay">
-                          {{ pay: payPerDay[index]?.toFixed(2) }}
-                        </Trans>
-                      </span>
-                    </div>
-                    <div className="flex items-center text-sm text-muted-foreground">
-                      <Trans i18nKey="workDays">
-                        {{ days: countWorkingDays(date) }}
-                      </Trans>
+                    <div className="flex w-full flex-col">
+                      <div className="flex justify-between">
+                        <div>
+                          {holidayPayPerDay[index] > workPayPerDay[index] ? (
+                            <ArrowBigUp
+                              size={32}
+                              className="inline pb-1 text-green-500"
+                            />
+                          ) : (
+                            <ArrowBigDown
+                              size={32}
+                              className="inline pb-1 text-red-500"
+                            />
+                          )}
+                          <span className="text-2xl font-bold">
+                            {holidayPayPerDay[index] > workPayPerDay[index]
+                              ? "+"
+                              : ""}
+                            {(
+                              holidayPayPerDay[index] - workPayPerDay[index]
+                            ).toFixed(2)}
+                            {t("perDay")}
+                          </span>
+                        </div>
+                        <div className="pr-3 pt-1">
+                          <HoverCard>
+                            <HoverCardTrigger>
+                              <div className="text-muted-foreground hover:text-primary">
+                                <Info size={16} />
+                              </div>
+                            </HoverCardTrigger>
+                            <HoverCardContent>
+                              <div className="flex flex-col gap-1">
+                                <div className="flex justify-between">
+                                  <span>{t("holidayPay")}</span>
+                                  <span>
+                                    {holidayPayPerDay[index]?.toFixed(2)}€
+                                  </span>
+                                </div>
+
+                                <div className="flex justify-between">
+                                  <span>{t("workPay")}</span>
+                                  <span>
+                                    {workPayPerDay[index]?.toFixed(2)}€
+                                  </span>
+                                </div>
+
+                                <div className="flex justify-between">
+                                  <span>{t("workDays")}</span>
+                                  <span>{countWorkingDays(date)}</span>
+                                </div>
+                              </div>
+                            </HoverCardContent>
+                          </HoverCard>
+                        </div>
+                      </div>
+                      <div className="ml-8 text-xs text-muted-foreground">
+                        {calcPercentage(
+                          holidayPayPerDay[index],
+                          workPayPerDay[index]
+                        )}
+                        {t("payPercentageDifference")}
+                      </div>
                     </div>
                   </div>
                 </div>
