@@ -1,10 +1,10 @@
 {
     "translations": {
-        "title": "Atostogų patarėjas",
+        "title": "🏖️ Apsimoka!",
         "language": "Kalba",
-        "toolDescription": "Įrankis, padedantis nuspręsti, kada finansiškai apsimoka vykti atostogauti",
-        "description": "Teisingai pasirinkus kurį mėnesį imti atostogas, galima gauti papildomą pinigų sumą prie savo atlyginimo. Atostoginiai už dieną paskaičiuojami pagal <1>paskutinių triejų mėnesių vidutinį užmokestį</1>.",
-        "salaryLabel": "Bazinė alga (prieš mokesčius)",
+        "toolDescription": "Skaičiuokė, padėsianti apsispręsti, kada finansiškai apsimoka vykti atostogauti",
+        "description": "Teisingai pasirinkus kurį mėnesi imti atostogas, galima gauti papildomą pinigų sumą prie savo atlyginimo. Atostoginiai už dieną paskaičiuojami pagal <1>paskutinių triejų mėnesių vidutinį užmokestį</1>.",
+        "salaryLabel": "Alga",
         "monthsLabel": "Rodomų mėnesių skaičius",
         "workDays": "Darbo dienų per mėnesi",
         "perDay": "€/diena",

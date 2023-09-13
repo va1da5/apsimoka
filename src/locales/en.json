@@ -1,10 +1,10 @@
 {
     "translations": {
-        "title": "Holiday Adviser",
+        "title": "🏝️ Worth It!",
         "language": "Language",
-        "toolDescription": "A tool that helps in deciding when it is financially viable to go on vacation",
-        "description": "By choosing the right month to take a vacation, it is possible to receive an additional amount of money added to your salary. The vacation pay per day is calculated based on the average salary of the last three months, according to <1>Lithuanian Labour Law</1>.",
-        "salaryLabel": "Base salary (Gross)",
+        "toolDescription": "A calculator that assists in determining when it is financially viable to go on vacation",
+        "description": "By choosing the right month to take a vacation, an additional amount of money can be added to your salary. The vacation pay per day is calculated based on the average salary of the last three months, as stated in <1>Lithuanian Labour Law</1>.",
+        "salaryLabel": "Salary",
         "monthsLabel": "Number of upcoming months",
         "workDays": "Works days per month",
         "perDay": "€/day",
