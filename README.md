@@ -1,8 +1,8 @@
-# Holiday Adviser
+# 🏖️ Apsimoka
 
-A tool that helps in deciding when it is financially viable to go on vacation
+Skaičiuokė, padedanti apsispręsti, kada finansiškai apsimoka vykti atostogauti.
 
-## References
+## Nuorodos
 
 - [shadcn/ui for Vite](https://ui.shadcn.com/docs/installation/vite)
 - [i18next](https://www.i18next.com/)
