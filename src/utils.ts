@@ -51,3 +51,9 @@ export const calcPayHolidayPerDay = (
 
   return (baseSalary * 3) / workingDays;
 };
+
+export function getMonthNameFromDate(date: Date, locale: string): string {
+  const options: Intl.DateTimeFormatOptions = { month: "long" };
+  const monthName: string = date.toLocaleString(locale, options);
+  return monthName;
+}

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import SalaryInput from "./components/salaryInput";
-import MonthsInput from "./components/monthsInput";
-import LanguageSelect from "./components/languageSelect";
+import SalaryInput from "@/components/salaryInput";
+import MonthsInput from "@/components/monthsInput";
+import LanguageSelect from "@/components/languageSelect";
 import { Trans, useTranslation } from "react-i18next";
 import { calcPayHolidayPerDay, calcWorkPayPerDay } from "./utils";
-import CalendarItem from "./components/calendarItem";
+import CalendarItem from "@/components/calendarItem";
+import Overview from "@/components/overview";
 
 function App() {
   const now = new Date();
@@ -87,6 +88,15 @@ function App() {
               <SalaryInput value={salary as number} onChange={setSalary} />
               <MonthsInput value={numberOfMonths} onChange={setNumberOfMonth} />
             </div>
+          </div>
+
+          <div className="mt-12 w-full h-[200px]">
+            <Overview
+              months={months}
+              holidayPayPerDay={holidayPayPerDay}
+              workPayPerDay={workPayPerDay}
+              locale={locale}
+            />
           </div>
 
           <div className="mt-10 flex flex-wrap justify-center gap-3 p-2">
