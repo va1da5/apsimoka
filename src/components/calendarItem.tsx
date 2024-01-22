@@ -1,6 +1,6 @@
 import { Calendar } from "@/components/ui/calendar";
 import { ArrowBigDown, ArrowBigUp, Info } from "lucide-react";
-import { bankHolidays } from "../values";
+import { publicHolidays } from "../values";
 import { lt, uk } from "date-fns/locale";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "./ui/hover-card";
 import { useTranslation } from "react-i18next";
@@ -37,7 +37,7 @@ export default function CalendarItem({
           ISOWeek
           mode="single"
           defaultMonth={date}
-          modifiers={{ holiday: bankHolidays }}
+          modifiers={{ holiday: publicHolidays }}
           modifiersClassNames={{
             holiday: "text-red-600 font-bold bg-red-50",
           }}

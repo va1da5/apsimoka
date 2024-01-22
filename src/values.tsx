@@ -1,39 +1,33 @@
-export const bankHolidays = [
-  [2023, 2, 16],
-  [2023, 4, 10],
-  [2023, 5, 1],
-  [2023, 7, 6],
-  [2023, 8, 15],
-  [2023, 11, 1],
-  [2023, 11, 2],
-  [2023, 12, 25],
-  [2023, 12, 26],
-  [2024, 1, 1],
-  [2024, 2, 16],
-  [2024, 3, 11],
-  [2024, 4, 1],
-  [2024, 5, 1],
-  [2024, 6, 24],
-  [2024, 7, 6],
-  [2024, 8, 15],
-  [2024, 11, 1],
-  [2024, 11, 2],
-  [2024, 12, 24],
-  [2024, 12, 25],
-  [2024, 12, 26],
-  [2025, 1, 1],
-  [2025, 2, 16],
-  [2025, 3, 11],
-  [2025, 4, 20],
-  [2025, 4, 21],
-  [2025, 5, 1],
-  [2025, 6, 1],
-  [2025, 6, 24],
-  [2025, 7, 6],
-  [2025, 8, 15],
-  [2025, 11, 1],
-  [2025, 11, 2],
-  [2025, 12, 24],
-  [2025, 12, 25],
-  [2025, 12, 26],
-].map(([year, month, day]) => new Date(year, month - 1, day));
+import Holidays from "date-holidays";
+
+function getDatesList(startDate: Date, endDate: Date) {
+  let currentDate = new Date(startDate);
+  const dateList = [];
+
+  while (currentDate < endDate) {
+    dateList.push(new Date(currentDate));
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+
+  return dateList;
+}
+
+const holidays = new Holidays("LT");
+const now = new Date();
+
+export const publicHolidays = [...Array(10).keys()]
+  .map((_, index) => {
+    const newDate = new Date(now);
+    newDate.setFullYear(newDate.getFullYear() + index - 1);
+    return newDate.getFullYear();
+  })
+  .map((year) => {
+    return holidays
+      .getHolidays(year)
+      .filter((holiday) => holiday.type == "public")
+      .map((holiday) => getDatesList(holiday.start, holiday.end));
+  })
+  .reduce((items, out) => {
+    return [...items, ...out];
+  }, [])
+  .map((items) => items[0]);

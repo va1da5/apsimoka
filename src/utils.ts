@@ -1,6 +1,6 @@
-import { bankHolidays } from "./values";
+import { publicHolidays } from "./values";
 
-const bankHolidaysISOString = bankHolidays.map((date) => date.toISOString());
+const bankHolidaysISOString = publicHolidays.map((date) => date.toISOString());
 
 export function countWorkingDays(date: Date): number {
   const year = date.getFullYear();

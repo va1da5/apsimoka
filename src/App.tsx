@@ -10,7 +10,7 @@ function App() {
   const now = new Date();
   const { t, i18n } = useTranslation();
   const [locale, setLocale] = useState<string>("lt");
-  const [numberOfMonths, setNumberOfMonth] = useState<number>(12);
+  const [numberOfMonths, setNumberOfMonth] = useState<number>(24);
   const [months, setMonths] = useState<Date[]>([]);
   const [salary, setSalary] = useState<number | undefined>(1000);
   const [holidayPayPerDay, setHolidayPayPerDay] = useState<number[] | []>([]);

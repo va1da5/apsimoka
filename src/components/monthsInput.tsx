@@ -34,7 +34,7 @@ export default function MonthsInput({ value, onChange }: Props) {
         onChange={(e) => {
           const count = parseInt(e.target.value);
           if (isNaN(count)) return;
-          if (count < 1 || count > 32) return;
+          if (count < 1 || count > 96) return;
           setCount(count);
         }}
       />
