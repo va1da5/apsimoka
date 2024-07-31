@@ -20,6 +20,7 @@ function App() {
   const calculateValues = () => {
     const dates = [...Array(numberOfMonths).keys()].map((_, index): Date => {
       const date = new Date();
+      date.setDate(1); // first day of a month
       date.setMonth(date.getMonth() + index);
       return date;
     });
